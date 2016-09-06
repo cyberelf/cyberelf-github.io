@@ -5,7 +5,7 @@
 
         <title>Docker</title>
 
-        <meta name="description" content="Open platform for application and enviroment management and distribution">
+        <meta name="description" content="Openstack Neutron deepdive">
         <meta name="author" content="Darren Zhao">
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -18,8 +18,6 @@
 
         <!-- Code syntax highlighting -->
         <link rel="stylesheet" href="../lib/css/zenburn.css">
-
-        <link rel="stylesheet" href="css/docker.css">
 
         <!-- Printing and PDF exports -->
         <script>
@@ -37,7 +35,7 @@
             <div class="slides">
                 <!-- Title page #1 -->
                 <section>
-                    <h1>Docker 介绍</h1>
+                    <h1>Debugging Openstack - network</h1>
                     <p>
                         <small>By <a href="mailto:gyzhao@hillstonenet.com">Darren Zhao</a></small>
                     </p>
@@ -46,7 +44,7 @@
                 <!-- #2 -->
                 <section>
                     <section>
-                        <h2>What is Docker?</h2>
+                        <h2>Openstack</h2>
                         <img src="images/docker.png" class="fragment">
                     </section>
                     <section>
@@ -64,7 +62,6 @@
                             <li>Run a single application or service</li>
                             <li>Share your image with others via register server or tar ball</li>
                             <li>Can be used on popular cloud platforms: aws, Google Compute Engine, Rackspace</li>
-                            <li>Build your own container based cloud</li>
                         </ul>
                     </section>
                     <section>
@@ -87,11 +84,7 @@
                     </section>
                     <section>
                         <h2>Why Docker</h2>
-                        <ul>
-                            <li>Flexibility (Container Cloud)</li>
-                            <li>Modularity (Micro service)</li>
-                            <li>Scalability</li>
-                        </ul>
+                        <img src="images/docked.png">
                     </section>
                 </section>
 
@@ -101,7 +94,7 @@
                     </section>
 
                     <section>
-                        <h2>Core Docker Architecture</h2>
+                        <h2>Docker Architecture</h2>
                         <ul>
                             <li>Docker Engine</li>
                             <ul>
@@ -109,8 +102,10 @@
                                 <li>docker daemon: the backend manages containers</li>
                                 <li>docker registry: a container that manages docker images</li>
                             </ul>
-                            <li>Image: layered fs (aufs)</li>
+                            <li>Docker image: layered fs (aufs)</li>
                             <li>Container: a running instance of image. Formerly use lxc, completely rewritten now</li>
+                            <li>Docker hub: cloud service hosts/share docker images, like github to git</li>
+                            <li>Kitematic: Docker GUI client</li>
                         </ul>
                     </section>
 
@@ -170,9 +165,6 @@
 
                     <section>
                         <h2><a href="https://docs.docker.com/articles/networking/">Docker network</a></h2>
-                        <p>
-                        Different drivers can be used, and you can even write your own. The default one is Linux bridge.
-                        </p>
                         <ul>
                             <li>Veth based: eth0 inside container and vethxxxx in host</li>
                             <li>Bridge docker0</li>
@@ -199,7 +191,7 @@
                 </section>
 
                 <section>
-                    <section><h1>Container Insight</h1></section>
+                    <section><h1>More About Containers</h1></section>
                     <section>
                         <h2>Technology set</h2>
                         <ul>
@@ -274,151 +266,12 @@ root        17  0.0  0.0  15564  1144 ?        R+   09:40   0:00 ps aux
                 </section>
 
                 <section>
-                    <section>
-                        <h2>Docker Swarm</h2>
-                        <img src="images/swarm.jpg" width="50%" height="50%">
-                    </section>
-                    <section>
-                        <h2>Bazaar to Cathedral</h2>
-                        <img src="images/swarm-arch-old.png" width="70%" height="70%">
-                    </section>
-                    <section>
-                        <h2><a href="https://raft.github.io/">Raft</a></h2>
-                        <iframe src="https://raft.github.io/raftscope/index.html" style="border: 0; width: 800px; height: 580px; margin-bottom: 20px"></iframe>
-                    </section>
-                </section>
-
-                <section>
-                    <section>
-                        <h1>Other Products</h1>
-                    </section>
-                    <section>
-                        <h2>Components</h2>
-                        <ul>
-                            <li><img src="images/icon/icon-machine.png">Docker Machine</li>
-                            <li><img src="images/icon/icon-compose.png">Docker Compose</li>
-                            <li><img src="images/icon/icon-ucp.png">Docker Universal Control Plane</li>
-                            <li><img src="images/icon/icon-registry.png">Docker Trusted Registry</li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h2>Services</h2>
-                        <ul>
-                            <li><img src="images/icon/icon-hub.png">Docker Hub</li>
-                            <li><img src="images/icon/icon-cloud.png">Docker Cloud</li>
-                        </ul>
-                    </section>
-                </section>
-
-                <section>
-                    <h2>App Contianer</h2>
-                </section>
-
-                <section>
-                    <section>
-                        <h1>Microservice</h1>
-                    </section>
-
-                    <section>
-                        <h2>Software scaling</h2>
-                        <img src="images/scaling.jpg">
-                    </section>
-
-                    <section>
-                        <h2>At a glance</h2>
-                        <img src="images/new/Fake-Architecture-Diagram.png">
-                    </section>
-                    <section>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th><a href="http://microservices.io/patterns/monolithic.html">Monolithic</a></th>
-                                    <th><a href="http://microservices.io/patterns/microservices.html">Microservice</a></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Design</td>
-                                    <td>One time, whole picture ahead</td>
-                                    <td>Incremental, define granularity ahead</td>
-                                </tr>
-                                <tr>
-                                    <td>Technology Stack</td>
-                                    <td>Bind to one stack set, difficult to adopt new tech</td>
-                                    <td>Flexible to choose and increase</td>
-                                </tr>
-                                <tr>
-                                    <td>Develop</td>
-                                    <td>Simple to develop but hard to debug</td>
-                                    <td>Interation and authentication beween services</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td>Less IO, but harder to modulize</td>
-                                    <td>More IO, easier to break down</td>
-                                </tr>
-                                <tr>
-                                    <td>Deploy</td>
-                                    <td>One time</td>
-                                    <td>Multiple services</td>
-                                </tr>
-                                <tr>
-                                    <td>Scale</td>
-                                    <td>Low, one dimension</td>
-                                    <td>Multiple services, multi-dimension</td>
-                                </tr>
-                                <tr>
-                                    <td>Upgrade/Re-arch</td>
-                                    <td>Hard</td>
-                                    <td>Easy, just replace some lego blocks</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </section>
-                    <section>
-                        <h2><a href="http://microservices.io/patterns/microservice-chassis.html">Microservice chassis</a></h2>
-                        <ul>
-                            <li>Service Discovery</li>
-                            <li>Service Authentication</li>
-                            <li>Service LB</li>
-                            <li>Other cross-cutting concerns</li>
-                        </ul>
-                    </section>
-                </section>
-
-                <section>
-                    <section>
-                        <h1>Security</h1>
-                    </section>
-                    <section>
-                        <h2>System security</h2>
-                        <ul>
-                            <li>Attack surface is a super set of vm</li>
-                            <li>Easier to be side-channeled</li>
-                            <li>Common kernel</li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h2>Microservice security</h2>
-                        <ul>
-                            <li>Distributed and dynamic, 0 trust, </li>
-                            <li>Granularity
-                                <ul>
-                                    <li>Service Gateway</li>
-                                    <li>Between edge, middle and core service tiers</li>
-                                    <li>Among services</li>
-                                </ul>
-                            </li>
-                            <li>Security entity
-                                <ul>
-                                    <li>Service</li>
-                                    <li>User</li>
-                                    <li>Data</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </section>
+                    <h2>What Container means to us</h2>
+                    <ul>
+                        <li>Fast/resilliant testing/build infrastructure</li>
+                        <li>Higher density VMs</li>
+                        <li><a href="http://events.linuxfoundation.org/sites/events/files/slides/Jun_Nakajima_NFV_Container_final.pdf">A new choice for NFV</a></li>
+                    </ul>
                 </section>
 
                 <section>
